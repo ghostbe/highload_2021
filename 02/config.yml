@@ -1,0 +1,7 @@
+---
+proxy:
+    port: 8080
+    bypass:
+        host: yandex.ru
+        port: 8081
+...
