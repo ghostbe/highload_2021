@@ -24,11 +24,8 @@ end
 
 local function handler(req)
     local client = require('http.client').new({max_connections = 1})
-    local url = config.proxy.bypass.host .. ':' .. config.proxy.bypass.port
-    local responce = client:request(req:method(), url, nil, { 
-        verify_host=false,
-        verify_peer=false
-    })
+    local url = config.proxy.bypass.host .. ':' .. config.proxy.bypass.port .. req:path() .. '?' .. req:query()
+    local responce = client:request(req:method(), url, nil, {timeout = 10})
     return responce
 end
 

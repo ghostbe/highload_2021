@@ -2,6 +2,6 @@
 proxy:
     port: 8080
     bypass:
-        host: https://tarantool.org
+        host: https://www.tarantool.org
         port: 443
 ...
