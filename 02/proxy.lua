@@ -24,7 +24,7 @@ end
 
 local function handler(req)
     local client = require('http.client').new({max_connections = 1})
-    local url = 'https://' .. config.proxy.bypass.host .. ':' .. config.proxy.bypass.port .. '/'
+    local url = config.proxy.bypass.host .. ':' .. config.proxy.bypass.port
     local responce = client:request(req:method(), url, nil, { 
         verify_host=false,
         verify_peer=false
@@ -36,7 +36,8 @@ config = load_config('config.yml')
 if config == nil then return end
 
 local router = require('http.router').new()
-router:route({method = 'GET', path = '/'}, handler)
+router:route({path = '/'}, handler)
+router:route({path = '/.*'}, handler)
 
 local server = require('http.server').new('localhost', config.proxy.port)
 server:set_router(router)
